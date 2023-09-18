@@ -2,7 +2,7 @@
 """Module to manage the loading of data from a .csv file
 and perform the pagination of this data."""
 import csv
-from typing import List
+from typing import Dict, List, Tuple
 
 
 class Server:
@@ -33,8 +33,8 @@ class Server:
 
         return self.dataset()[page_data[0]:page_data[1]]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10):
-        """a"""
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
+        """returns a dictionary"""
         try:
             if len(self.get_page(page + 1, page_size)) < page_size:
                 next_page = None
@@ -60,7 +60,7 @@ class Server:
         return dict_to_return
 
 
-def index_range(page, page_size):
+def index_range(page: int, page_size: int) -> Tuple:
     """Function that calculates the initial and
     final indexes and returns them in a tuple."""
     start_index = (page - 1) * page_size
